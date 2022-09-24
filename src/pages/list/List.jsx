@@ -15,6 +15,14 @@ export const List = () => {
   const [openDate, setOpenDate] = useState(false);
   const [options, setOptions] = useState(location.state.options);
 
+  const handleOption = (name, operation) =>{
+    setOptions(pre=>{
+      return {
+        ...pre, [name] : operation === "i" ? options[name] + 1 : options[name] -1,
+      }
+    })
+  };
+
   return (
     <div>
       <Navbar />
@@ -25,7 +33,7 @@ export const List = () => {
             <h1 className="lsTitle">Search</h1>
             <div className="lsItem">
               <label htmlFor="">Destination</label>
-              <input type="text" name="" id="" placeholder={destination} />
+              <input type="text" name="" id="" placeholder={destination} onChange={e=>setDestination(e.target.value)} />
             </div>
             <div className="lsItem">
               <label htmlFor="">Check-in Date</label>
@@ -45,15 +53,30 @@ export const List = () => {
                 </div>
                 <div className="lsOptionItem">
                   <span className="lsOptionText">Adult</span>
-                  <input type="number" min={1} className="lsOptionInput" placeholder={options.adult} />
+                  {/* <input type="number" min={1} className="lsOptionInput" placeholder={options.adult} /> */}
+                  <div className="optionCounter">
+                    <button className="optionCouterButton" disabled={options.adult <= 1} onClick={()=>handleOption("adult", "d")}>-</button>
+                    <span className="optionCounterNumber">{options.adult}</span>
+                    <button className="optionCouterButton" onClick={()=>handleOption("adult", "i")}>+</button>
+                  </div>
                 </div>
                 <div className="lsOptionItem">
                   <span className="lsOptionText">Children</span>
-                  <input type="number" min={0} className="lsOptionInput" placeholder={options.children} />
+                  {/* <input type="number" min={0} className="lsOptionInput" placeholder={options.children} /> */}
+                  <div className="optionCounter">
+                    <button className="optionCouterButton" disabled={options.children <= 0} onClick={()=>handleOption("children", "d")}>-</button>
+                    <span className="optionCounterNumber">{options.children}</span>
+                    <button className="optionCouterButton" onClick={()=>handleOption("children", "i")}>+</button>
+                  </div>
                 </div>
                 <div className="lsOptionItem">
                   <span className="lsOptionText">Room</span>
-                  <input type="number" min={1} className="lsOptionInput" placeholder={options.room} />
+                  {/* <input type="number" min={1} className="lsOptionInput" placeholder={options.room} /> */}
+                  <div className="optionCounter">
+                    <button className="optionCouterButton" disabled={options.room <= 1} onClick={()=>handleOption("room", "d")}>-</button>
+                    <span className="optionCounterNumber">{options.room}</span>
+                    <button className="optionCouterButton" onClick={()=>handleOption("room", "i")}>+</button>
+                  </div>
                 </div>
               </div>
             </div>
