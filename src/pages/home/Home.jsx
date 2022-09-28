@@ -26,4 +26,9 @@ export const Home = () => {
   )
 }
 
+
+
+
+
+
 // Reference Site -  https://www.booking.com/
